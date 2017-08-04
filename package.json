@@ -1,14 +1,14 @@
 {
   "name": "sentar",
   "version": "0.0.0",
-  "description": "Small description for sentar goes here",
+  "description": "Seating charts for an awesome teacher",
   "license": "MIT",
-  "author": "",
+  "author": "Jon Johnson <jon.johnson@ucsf.edu>",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "https://github.com/jrjohnson/sentar",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
@@ -34,7 +34,6 @@
     "ember-load-initializers": "^1.0.0",
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.14.1",
-    "ember-welcome-page": "^3.0.0",
     "loader.js": "^4.2.3"
   },
   "engines": {
