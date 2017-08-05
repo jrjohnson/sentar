@@ -1,7 +1,12 @@
 <h2>Your Classrooms</h2>
 <ul>
   {{#each classrooms as |classroom|}}
-    <li>{{classroom.name}} <button {{action 'deleteClassroom' classroom}}>Delete</button></li>
+    <li>
+      {{#link-to 'classroom' classroom}}
+        {{classroom.name}}
+      {{/link-to}}
+      <button {{action 'deleteClassroom' classroom}}>Delete</button>
+    </li>
   {{else}}
     <li>None</li>
   {{/each}}
