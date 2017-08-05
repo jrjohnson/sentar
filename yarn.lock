@@ -2215,7 +2215,7 @@ ember-cli-babel@^5.1.5, ember-cli-babel@^5.1.6:
     ember-cli-version-checker "^1.0.2"
     resolve "^1.1.2"
 
-ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.3.0, ember-cli-babel@^6.4.1:
+ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.1.0, ember-cli-babel@^6.3.0, ember-cli-babel@^6.4.1:
   version "6.7.1"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.7.1.tgz#98de75cb3eaf3198a80aac36ae82d8ea48c9d91f"
   dependencies:
@@ -2527,6 +2527,13 @@ ember-cli@~2.14.2:
     validate-npm-package-name "^3.0.0"
     walk-sync "^0.3.0"
     yam "0.0.22"
+
+ember-composable-helpers@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/ember-composable-helpers/-/ember-composable-helpers-2.0.3.tgz#9b5e595bf5a45bc4431adfe27821f23b1d534be0"
+  dependencies:
+    broccoli-funnel "^1.0.1"
+    ember-cli-babel "^6.1.0"
 
 ember-data@~2.14.9:
   version "2.14.9"

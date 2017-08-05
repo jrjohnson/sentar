@@ -1,2 +1,13 @@
 <h2>{{get (await model.classroom) 'name'}}</h2>
 <h3>{{model.name}}</h3>
+
+<h4>People</h4>
+<ol>
+  {{#each (sort-by 'name' (await model.people)) as |person|}}
+    <li>{{person.name}}</li>
+  {{else}}
+    <li>None</li>
+  {{/each}}
+</ol>
+{{one-way-input newPersonName update=(action (mut newPersonName))}}
+<button {{action 'createNewPerson'}}>Add</button>

@@ -1,0 +1,40 @@
+{
+  "rules": {
+    "users": {
+      ".indexOn" : "uid",
+			//in order to be able to query the user table for the user's id everyone needs access to all users
+			//so we need to be careful with what is stored in the user object
+      ".read": "auth != null",
+      "$id": {
+        ".write": "auth != null && (!data.exists() || data.child('uid').val() === auth.uid)"
+      }
+    },
+    "classrooms": {
+      "$id": {
+        ".read": "auth != null && root.child('users').child(data.child('user').val()).child('uid').val() === auth.uid",
+        ".write": "auth != null",
+	      "user": {
+  	      ".validate": "auth.uid === root.child('users').child(newData.val()).child('uid').val()"
+    	  }
+      }
+    },
+    "seatingCharts": {
+      "$id": {
+        ".read": "auth != null && auth.uid === root.child('users').child(root.child('classrooms').child(data.child('classroom').val()).child('user').val()).child('uid').val()",
+        ".write": "auth != null",
+      },
+      "classroom": {
+  	      ".validate": "auth.uid === root.child('users').child(root.child('classrooms').child(newData.val()).child('user').val()).child('uid').val()"
+    	  }
+    },
+    "people": {
+      "$id": {
+        ".read": "auth != null && auth.uid === root.child('users').child(root.child('classrooms').child(root.child('seatingCharts').child(data.child('seatingChart').val()).child('classroom').val()).child('user').val()).child('uid').val()",
+        ".write": "auth != null",
+      },
+      "seatingChart": {
+  	    ".validate": "auth.uid === root.child('users').child(root.child('seatingCharts').child(newData.val()).child('classroom').child('user').val()).child('uid').val()"
+    	}
+    }
+  }
+}
