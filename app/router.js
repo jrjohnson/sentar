@@ -10,6 +10,7 @@ Router.map(function() {
   this.authenticatedRoute('classrooms');
   this.route('login');
   this.authenticatedRoute('logout');
+  this.authenticatedRoute('dashboard');
 });
 
 export default Router;

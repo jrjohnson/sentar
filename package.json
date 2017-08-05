@@ -35,6 +35,7 @@
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
     "ember-one-way-controls": "^2.0.1",
+    "ember-promise-helpers": "^1.0.3",
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.14.1",
     "emberfire": "^2.0.7",

@@ -8,7 +8,7 @@ export default Route.extend({
   beforeModel(){
     const session = this.get('session');
     if (session.get('isAuthenticated')) {
-      this.replaceWith('classrooms');
+      this.replaceWith('dashboard');
     }
   },
   actions: {
@@ -18,7 +18,7 @@ export default Route.extend({
       const data = await session.open('firebase', { provider: provider});
       const uid = data.currentUser.uid;
       await authenticatedUser.build(uid);
-      this.replaceWith('classrooms');
+      this.replaceWith('dashboard');
     }
   }
 });
