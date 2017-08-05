@@ -1,0 +1,10 @@
+<h2>Your Classrooms</h2>
+<ul>
+  {{#each classrooms as |classroom|}}
+    <li>{{classroom.name}} <button {{action 'deleteClassroom' classroom}}>Delete</button></li>
+  {{else}}
+    <li>None</li>
+  {{/each}}
+</ul>
+{{one-way-input newClassroomName update=(action (mut newClassroomName))}}
+<button {{action 'createNewClassroom'}}>Add</button>

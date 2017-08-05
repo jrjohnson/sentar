@@ -1,0 +1,4 @@
+{{#unless session.isAuthenticated}}
+  <button {{action "signIn" "google"}}>Sign in with google</button>
+  <button {{action "signIn" "anonymous"}}>Sign in Anonymously</button>
+{{/unless}}

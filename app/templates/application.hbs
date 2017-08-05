@@ -1,1 +1,14 @@
-{{outlet}}
+<div class='wrapper'>
+  <header>
+    <h1>Sentar</h1>
+    <h5>
+      {{#if session.isAuthenticated}}
+        Logged in as {{session.currentUser.displayName}} {{#link-to 'logout'}}Logout{{/link-to}}
+      {{else}}
+        {{#link-to 'login'}}Login{{/link-to}}
+      {{/if}}
+    </h5>
+  </header>
+  {{outlet}}
+  <footer></footer>
+</div>
