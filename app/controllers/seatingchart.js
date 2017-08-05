@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
-const { Controller, inject } = Ember;
+const { Controller, inject, RSVP } = Ember;
+const { all } = RSVP;
 
 export default Controller.extend({
   store: inject.service(),
@@ -29,5 +30,18 @@ export default Controller.extend({
       await person.save();
       await seatingChart.save();
     },
+    async randomizePlaces(){
+      const seatingChart = this.get('model');
+      const people = await seatingChart.get('people');
+      let places = [];
+      for (var i = 1; i <= people.get('length'); i++) {
+          places.push(i);
+      }
+      people.forEach(person => {
+        const place = places[Math.floor(Math.random() * places.length)];
+        person.set('place', place);
+      });
+      await all(people.invoke('save'));
+    }
   }
 });

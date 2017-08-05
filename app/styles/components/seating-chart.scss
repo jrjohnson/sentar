@@ -1,0 +1,16 @@
+.seating-chart {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px 100px;
+  grid-gap: 10px;
+  margin: 2em;
+  justify-content: center;
+
+  .desk {
+    border: 1px solid $black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+}
