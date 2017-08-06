@@ -1,0 +1,33 @@
+@mixin desk-grid ($desk-size) {
+  display: grid;
+  grid-template-columns: repeat(20,  ($desk-size / 2));
+  grid-template-rows: repeat(20,  ($desk-size / 2));
+
+  @for $column from 1 through 18 {
+    @for $row from 1 through 18 {
+      .place-#{$column}-#{$row} {
+        grid-column-start: $column;
+        grid-column-end:  $column + 2;
+        grid-row-start: $row;
+        grid-row-end:  $row + 2;
+      }
+    }
+  }
+
+  .position {
+    box-sizing: border-box;
+    &.accepts-drag {
+      background-color: $black;
+      border: 1px dotted $black;
+    }
+  }
+}
+
+@mixin desk ($desk-size) {
+  border: 1px solid $black;
+  box-sizing: border-box;
+  height: $desk-size;
+  overflow: hidden;
+  width: $desk-size;
+  z-index: 10;
+}

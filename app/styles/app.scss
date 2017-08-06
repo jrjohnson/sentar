@@ -1,5 +1,7 @@
 @import 'colors';
 @import 'body';
+@import 'mixins/desk-grid';
 @import 'components/classroom-layout';
+@import 'components/classroom-layout-manager';
 @import 'components/seating-chart';
 @import 'components/sentar-dashboard';

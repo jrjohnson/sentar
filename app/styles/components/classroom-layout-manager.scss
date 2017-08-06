@@ -1,0 +1,21 @@
+.classroom-layout-manager {
+  $desk-size: 100px;
+  display: grid;
+  grid-template-columns: $desk-size ($desk-size * 10);
+  grid-template-rows:  ($desk-size * 10);
+  grid-column-gap:  ($desk-size / 10);
+
+  .unpositioned-desks {
+    grid-row: 1 / span 20;
+    .desk {
+      margin-bottom: 5px;
+    }
+  }
+  .positioned-desks {
+    @include desk-grid($desk-size);
+  }
+
+  .desk {
+    @include desk($desk-size);
+  }
+}
