@@ -9,18 +9,6 @@ export default Component.extend({
     this.set('desks', []);
   },
   desks: null,
-  unpositionedDesks: computed('desks.@each.positioned', function(){
-    const desks = this.get('desks');
-    const unpositionedDesks = desks.filter(desk => !desk.get('positioned'));
-
-    return unpositionedDesks;
-  }),
-  positionedDesks: computed('desks.@each.positioned', function(){
-    const desks = this.get('desks');
-    const positionedDesks = desks.filter(desk => desk.get('positioned'));
-
-    return positionedDesks;
-  }),
   places: computed(function(){
     let places = [];
     for (let column = 1; column <= 18; column++) {

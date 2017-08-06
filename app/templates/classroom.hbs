@@ -16,8 +16,11 @@
 {{#if isManagingLayout}}
   <button  {{action (toggle 'isManagingLayout' this)}}>Done</button>
   <button {{action 'createNewDesk'}}>Create Desk</button>
-  {{classroom-layout-manager desks=(await model.desks)}}
+  {{classroom-layout-manager
+    positionedDesks=(await model.positionedDesks)
+    unpositionedDesks=(await model.unpositionedDesks)
+  }}
 {{else}}
   <button {{action (toggle 'isManagingLayout' this)}}>Manage</button>
-  {{classroom-layout desks=(await model.desks)}}
+  {{classroom-layout desks=(await model.positionedDesks)}}
 {{/if}}

@@ -6,7 +6,20 @@ const { all } = RSVP;
 export default Controller.extend({
   store: inject.service(),
   newPersonName: null,
-
+  async removeAllAssignments(){
+    const seatingChart = this.get('model');
+    const classroom = await seatingChart.get('classroom');
+    const desks = await classroom.get('desks');
+    const people = await seatingChart.get('people');
+    desks.forEach(desk => {
+      desk.get('people').removeObjects(people.toArray());
+    });
+    people.forEach(person => {
+      person.set('desk', null);
+    });
+    await all(people.invoke('save'));
+    await all(desks.invoke('save'));
+  },
   actions: {
     async createNewPerson(){
       const store = this.get('store');
@@ -30,18 +43,25 @@ export default Controller.extend({
       await person.save();
       await seatingChart.save();
     },
-    async randomizePlaces(){
+    async removeAllAssignments(){
+      await this.removeAllAssignments();
+    },
+    async randomizeAssignments(){
+      await this.removeAllAssignments();
       const seatingChart = this.get('model');
+      const classroom = await seatingChart.get('classroom');
+      const desks = await classroom.get('desks');
+      const deskIds = desks.mapBy('id');
       const people = await seatingChart.get('people');
-      let places = [];
-      for (var i = 1; i <= people.get('length'); i++) {
-          places.push(i);
-      }
-      people.forEach(person => {
-        const place = places[Math.floor(Math.random() * places.length)];
-        person.set('place', place);
+      people.forEach(async person => {
+        const newDeskId = deskIds[Math.floor(Math.random() * deskIds.length)];
+        const desk = desks.findBy('id', newDeskId);
+        person.set('desk', desk);
+        desk.get('people').pushObject(person);
+        deskIds.removeObject(newDeskId);
       });
       await all(people.invoke('save'));
+      await all(desks.invoke('save'));
     }
   }
 });

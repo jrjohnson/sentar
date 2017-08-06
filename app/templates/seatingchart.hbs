@@ -12,6 +12,11 @@
 {{one-way-input newPersonName update=(action (mut newPersonName))}}
 <button {{action 'createNewPerson'}}>Add</button>
 
-<button {{action 'randomizePlaces'}}>Randomize Places</button>
+<button {{action 'randomizeAssignments'}}>Randomize Assignments</button>
+<button {{action 'removeAllAssignments'}}>Remove All Assignments</button>
 
-{{seating-chart people=(await model.people)}}
+{{seating-chart
+  unpositionedPeople=(await model.unpositionedPeople)
+  positionedPeople=(await model.positionedPeople)
+  desks=(await model.classroom.positionedDesks)
+}}

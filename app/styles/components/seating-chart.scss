@@ -1,16 +1,30 @@
 .seating-chart {
+  $desk-size: 100px;
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px;
-  grid-template-rows: 100px 100px 100px 100px;
-  grid-gap: 10px;
-  margin: 2em;
-  justify-content: center;
+  grid-template-columns: $desk-size ($desk-size * 10);
+  grid-template-rows:  ($desk-size * 10);
+  grid-column-gap:  ($desk-size / 10);
 
-  .desk {
-    border: 1px solid $black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .unpositioned-people {
+    grid-row: 1 / span 20;
+    .desk {
+      margin-bottom: 5px;
+    }
+  }
+  .desks {
+    @include desk-grid($desk-size);
   }
 
+  .desk {
+    @include desk($desk-size);
+  }
+
+  .person {
+    border: 1px solid $teal;
+    box-sizing: border-box;
+    height: $desk-size * .8;
+    overflow: hidden;
+    width: $desk-size * .8;
+    z-index: 20;
+  }
 }

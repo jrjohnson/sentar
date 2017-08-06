@@ -1,3 +1,25 @@
-{{#each (sort-by 'place' people) as |person|}}
-  <div class='desk'>{{person.name}}</div>
-{{/each}}
+{{#draggable-object-target overrideClass='unpositioned-people' action="removePersonFromDesk"}}
+  {{#each unpositionedPeople as |person|}}
+    {{#draggable-object content=person}}
+      <div class='person'>{{person.name}}</div>
+    {{/draggable-object}}
+  {{/each}}
+{{/draggable-object-target}}
+
+<div class='desks'>
+  {{#each desks as |desk|}}
+    {{#draggable-object-target
+      action="putPersonInDesk"
+      overrideClass=(concat 'desk ' desk.placeClassName)
+      desk=desk
+    }}
+      {{#each positionedPeople as |person|}}
+        {{#if (contains person (await desk.people))}}
+          {{#draggable-object content=person}}
+            <div class='person'>{{person.name}}</div>
+          {{/draggable-object}}
+        {{/if}}
+      {{/each}}
+    {{/draggable-object-target}}
+  {{/each}}
+</div>
