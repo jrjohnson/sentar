@@ -1,0 +1,20 @@
+{{#draggable-object-target overrideClass='unpositioned-desks' action="unpositionDesk"}}
+  {{#each unpositionedDesks as |desk|}}
+    {{#draggable-object content=desk}}
+      <div class='desk'>{{desk.name}}</div>
+    {{/draggable-object}}
+  {{/each}}
+{{/draggable-object-target}}
+
+<div class = 'positioned-desks'>
+  {{#each positionedDesks as |desk|}}
+    {{#draggable-object content=desk overrideClass=(concat 'desk place-' desk.column '-' desk.row)}}
+      {{desk.id}}
+    {{/draggable-object}}
+  {{/each}}
+
+  {{#each places as |place|}}
+    {{#draggable-object-target overrideClass=(concat 'position ' place.className) action="moveDesk" row=place.row column=place.column}}
+    {{/draggable-object-target}}
+  {{/each}}
+</div>

@@ -27,6 +27,15 @@
   	      ".validate": "auth.uid === root.child('users').child(root.child('classrooms').child(newData.val()).child('user').val()).child('uid').val()"
     	  }
     },
+    "desks": {
+      "$id": {
+        ".read": "auth != null && auth.uid === root.child('users').child(root.child('classrooms').child(data.child('classroom').val()).child('user').val()).child('uid').val()",
+        ".write": "auth != null",
+      },
+      "classroom": {
+  	      ".validate": "auth.uid === root.child('users').child(root.child('classrooms').child(newData.val()).child('user').val()).child('uid').val()"
+    	  }
+    },
     "people": {
       "$id": {
         ".read": "auth != null && auth.uid === root.child('users').child(root.child('classrooms').child(root.child('seatingCharts').child(data.child('seatingChart').val()).child('classroom').val()).child('user').val()).child('uid').val()",

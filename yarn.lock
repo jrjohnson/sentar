@@ -2205,7 +2205,7 @@ ember-cli-babel@5.1.6:
     ember-cli-version-checker "^1.0.2"
     resolve "^1.1.2"
 
-ember-cli-babel@^5.1.5, ember-cli-babel@^5.1.6:
+ember-cli-babel@^5.1.5, ember-cli-babel@^5.1.6, ember-cli-babel@^5.2.4:
   version "5.2.4"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-5.2.4.tgz#5ce4f46b08ed6f6d21e878619fb689719d6e8e13"
   dependencies:
@@ -2567,6 +2567,12 @@ ember-data@~2.14.9:
     semver "^5.1.0"
     silent-error "^1.0.0"
     testem "1.15.0"
+
+ember-drag-drop@^0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/ember-drag-drop/-/ember-drag-drop-0.4.5.tgz#10b507e82499c5910126e31e20c150bc047ee67d"
+  dependencies:
+    ember-cli-babel "^5.2.4"
 
 ember-export-application-global@^2.0.0:
   version "2.0.0"

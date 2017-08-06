@@ -29,5 +29,19 @@ export default Controller.extend({
       await seatingChart.save();
       await classroom.save();
     },
+    async createNewDesk(){
+      const store = this.get('store');
+      const classroom = this.get('model');
+      const positioned = false;
+      const name = '';
+      const newDesk = store.createRecord('desk', {
+        name,
+        positioned,
+        classroom
+      });
+      classroom.get('desks').addObject(newDesk);
+      await newDesk.save();
+      await classroom.save();
+    },
   }
 });

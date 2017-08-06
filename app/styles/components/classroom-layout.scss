@@ -1,0 +1,49 @@
+.classroom-layout {
+  display: grid;
+  grid-template-columns: 100px 1000px;
+  grid-template-rows: 1000px;
+  grid-column-gap: 10px;
+
+  .unpositioned-desks {
+    grid-row: 1 / span 20;
+    .desk {
+      margin-bottom: 5px;
+    }
+  }
+
+  .positioned-desks {
+    display: grid;
+    grid-template-columns: repeat(20, 50px);
+    grid-template-rows: repeat(20, 50px);
+
+    @for $column from 1 through 18 {
+      @for $row from 1 through 18 {
+        .place-#{$column}-#{$row} {
+          grid-column-start: $column;
+          grid-column-end:  $column + 2;
+          grid-row-start: $row;
+          grid-row-end:  $row + 2;
+        }
+      }
+    }
+
+    .position {
+      box-sizing: border-box;
+      &.accepts-drag {
+        background-color: $black;
+        border: 1px dotted $black;
+      }
+    }
+
+  }
+
+  .desk {
+    border: 1px solid $black;
+    box-sizing: border-box;
+    height: 100px;
+    overflow: hidden;
+    width: 100px;
+    z-index: 10;
+  }
+
+}
