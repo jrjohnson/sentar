@@ -9,7 +9,7 @@ export default Ember.Component.extend({
       const positionedPeople = this.get('positionedPeople');
       const originalDesk = await person.get('desk');
       const deskPeopleIds = desk.hasMany('people').ids();
-      const personAlreadyInDesk = positionedPeople.find(person => deskPeopleIds.includes(person.get('id')));
+      const personAlreadyInDesk = positionedPeople.find(positionedPerson => deskPeopleIds.includes(positionedPerson.get('id')));
 
       if (originalDesk) {
         originalDesk.get('people').removeObject(person);
