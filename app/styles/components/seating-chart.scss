@@ -1,16 +1,18 @@
 .seating-chart {
   $desk-size: 100px;
   display: grid;
+  grid-column-gap:  ($desk-size / 10);
   grid-template-columns: $desk-size ($desk-size * 10);
   grid-template-rows:  ($desk-size * 10);
-  grid-column-gap:  ($desk-size / 10);
 
   .unpositioned-people {
     grid-row: 1 / span 20;
+
     .desk {
       margin-bottom: 5px;
     }
   }
+
   .desks {
     @include desk-grid($desk-size);
   }

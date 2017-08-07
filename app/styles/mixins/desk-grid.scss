@@ -6,16 +6,17 @@
   @for $column from 1 through 18 {
     @for $row from 1 through 18 {
       .place-#{$column}-#{$row} {
-        grid-column-start: $column;
         grid-column-end:  $column + 2;
-        grid-row-start: $row;
+        grid-column-start: $column;
         grid-row-end:  $row + 2;
+        grid-row-start: $row;
       }
     }
   }
 
   .position {
     box-sizing: border-box;
+
     &.accepts-drag {
       background-color: $black;
       border: 1px dotted $black;
