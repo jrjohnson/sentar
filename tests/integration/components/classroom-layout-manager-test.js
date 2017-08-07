@@ -13,13 +13,4 @@ test('it renders', function(assert) {
   this.render(hbs`{{classroom-layout-manager}}`);
 
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#classroom-layout-manager}}
-      template block text
-    {{/classroom-layout-manager}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

@@ -13,13 +13,4 @@ test('it renders', function(assert) {
   this.render(hbs`{{seating-chart}}`);
 
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#seating-chart}}
-      template block text
-    {{/seating-chart}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });
