@@ -1,0 +1,23 @@
+<h2>
+  {{#link-to 'classrooms'}}
+    {{fa-icon 'arrow-left'}}{{classroom.name}}
+  {{/link-to}}
+</h2>
+{{seating-chart-list classroom=classroom}}
+
+<h2>
+  Classroom Layout
+  {{#unless isManagingLayout}}
+    {{fa-icon 'pencil' click=(action setIsManagingLayout true) title='edit'}}
+  {{/unless}}
+</h2>
+{{#if isManagingLayout}}
+  <button  {{action setIsManagingLayout false}}>Done</button>
+  <button {{action 'createNewDesk'}}>Create Desk</button>
+  {{classroom-layout-manager
+    positionedDesks=(await classroom.positionedDesks)
+    unpositionedDesks=(await classroom.unpositionedDesks)
+  }}
+{{else}}
+  {{classroom-layout desks=(await classroom.positionedDesks)}}
+{{/if}}

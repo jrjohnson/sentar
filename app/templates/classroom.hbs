@@ -1,19 +1,5 @@
-<h2>
-  {{#link-to 'classrooms'}}
-    {{fa-icon 'arrow-left'}}{{model.name}}
-  {{/link-to}}
-</h2>
-{{seating-chart-list classroom=model}}
-
-<h2>Classroom Layout</h2>
-{{#if isManagingLayout}}
-  <button  {{action (toggle 'isManagingLayout' this)}}>Done</button>
-  <button {{action 'createNewDesk'}}>Create Desk</button>
-  {{classroom-layout-manager
-    positionedDesks=(await model.positionedDesks)
-    unpositionedDesks=(await model.unpositionedDesks)
-  }}
-{{else}}
-  <button {{action (toggle 'isManagingLayout' this)}}>Manage</button>
-  {{classroom-layout desks=(await model.positionedDesks)}}
-{{/if}}
+{{single-classroom
+  classroom=model
+  isManagingLayout=isManagingLayout
+  setIsManagingLayout=(action (mut isManagingLayout))
+}}

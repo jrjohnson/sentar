@@ -20,4 +20,10 @@
   .desk {
     @include desk($desk-size);
   }
+
+  .front-of-room {
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+  }
 }

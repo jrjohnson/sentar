@@ -13,5 +13,9 @@
     .desk {
       @include desk($desk-size);
     }
+
+    .front-of-room {
+      font-size: .5em;
+    }
   }
 }

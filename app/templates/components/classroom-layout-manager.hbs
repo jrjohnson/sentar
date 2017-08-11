@@ -9,7 +9,7 @@
 <div class = 'positioned-desks'>
   {{#each positionedDesks as |desk|}}
     {{#draggable-object content=desk overrideClass=(concat 'desk ' desk.placeClassName)}}
-      {{desk.id}}
+      {{desk.name}}
     {{/draggable-object}}
   {{/each}}
 
@@ -22,4 +22,5 @@
     }}
     {{/draggable-object-target}}
   {{/each}}
+  <div class='front-of-room'>Front</div>
 </div>

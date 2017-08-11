@@ -11,8 +11,8 @@ export default Component.extend({
   desks: null,
   places: computed(function(){
     let places = [];
-    for (let column = 1; column <= 18; column++) {
-      for (let row = 1; row <= 18; row++) {
+    for (let column = 1; column <= 19; column++) {
+      for (let row = 1; row <= 19; row++) {
         const className = `place-${column}-${row}`;
         places.push({
           row,
