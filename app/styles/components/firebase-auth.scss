@@ -1,0 +1,58 @@
+.firebase-auth {
+  $google-color: #df4b37;
+  $facebook-color: #3b5998;
+  $twitter-color: #0084b4;
+  $github-color: #999;
+
+  display: grid;
+  grid-row-gap: 5px;
+  list-style-type: none;
+  width: 25em;
+
+  button {
+    background: none;
+    border: 1px solid $black;
+    cursor: pointer;
+    font-size: 1.25em;
+    margin: 0;
+    padding: 1em;
+    vertical-align: middle;
+    width: 100%;
+
+    &.google {
+      background-color: $white;
+      color: $google-color;
+    }
+
+    &.facebook {
+      background-color: $facebook-color;
+      color: $white;
+    }
+
+    &.twitter {
+      background-color: $twitter-color;
+      color: $white;
+    }
+
+    &.github {
+      background-color: $github-color;
+      color: $white;
+    }
+
+    &.google:hover,
+    &.facebook:hover,
+    &.twitter:hover,
+    &.github:hover,
+    &:hover {
+      background-color: $teal;
+      color: $white;
+    }
+
+
+
+    i {
+      font-size: 2em;
+      vertical-align: middle;
+    }
+  }
+}

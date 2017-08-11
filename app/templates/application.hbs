@@ -1,14 +1,20 @@
 <div class='wrapper'>
-  <header>
+  <header class='header'>
     <h1>Sentar</h1>
-    <h5>
-      {{#if session.isAuthenticated}}
-        Logged in as {{session.currentUser.displayName}} {{#link-to 'logout'}}Logout{{/link-to}}
-      {{else}}
-        {{#link-to 'login'}}Login{{/link-to}}
-      {{/if}}
-    </h5>
+    {{#if session.isAuthenticated}}
+      <div class='auth'>
+        {{fa-icon 'user'}}
+        {{#if session.currentUser.displayName}}
+          {{session.currentUser.displayName}}
+        {{else}}
+          Annonymous
+        {{/if}}
+        {{#link-to 'logout'}}Logout{{/link-to}}
+      </div>
+    {{/if}}
   </header>
-  {{outlet}}
-  <footer></footer>
+  <section class='body'>
+    {{outlet}}
+  </section>
+  <footer class='footer'></footer>
 </div>

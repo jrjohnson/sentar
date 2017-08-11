@@ -8,7 +8,6 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.authenticatedRoute('classrooms');
-  this.route('login');
   this.authenticatedRoute('logout');
   this.authenticatedRoute('dashboard');
   this.authenticatedRoute('classroom', { path: 'classrooms/:classroom_id'});

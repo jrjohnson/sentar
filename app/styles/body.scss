@@ -6,15 +6,42 @@ body {
   padding: 0;
 }
 
-header {
-  background-color: $black;
-  color: $grey;
-  padding: 2em;
-  text-align: center;
-  width: 100%;
-}
+.wrapper {
+  display: grid;
+  grid-template-columns: 50px 1fr 50px;
+  grid-template-rows: 100px 1fr 100px;
 
-h1 {
-  margin: 0;
-  padding: 0;
+  .header {
+    background-color: $black;
+    color: $grey;
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    padding: 2em;
+    text-align: center;
+    width: 100%;
+
+    h1 {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+    }
+
+    .auth {
+      a,
+      a:visited,
+      a:active {
+        color: $white;
+      }
+    }
+  }
+
+  .body {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .footer {
+    grid-column: 1 / span 3;
+    grid-row: 3;
+  }
 }

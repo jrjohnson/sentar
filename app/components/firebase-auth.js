@@ -1,24 +1,22 @@
 import Ember from 'ember';
 
-const { Route, inject } = Ember;
+const { Component, inject } = Ember;
 
-export default Route.extend({
+export default Component.extend({
   session: inject.service(),
   authenticatedUser: inject.service(),
-  beforeModel(){
-    const session = this.get('session');
-    if (session.get('isAuthenticated')) {
-      this.replaceWith('dashboard');
-    }
-  },
+  router: inject.service(),
+  tagName: 'ul',
+  classNames: ['firebase-auth', 'fa-ul'],
   actions: {
     async signIn(provider) {
       const session = this.get('session');
       const authenticatedUser = this.get('authenticatedUser');
+      const router = this.get('router');
       const data = await session.open('firebase', { provider: provider});
       const uid = data.currentUser.uid;
       await authenticatedUser.build(uid);
-      this.replaceWith('dashboard');
+      router.transitionTo('dashboard');
     }
   }
 });

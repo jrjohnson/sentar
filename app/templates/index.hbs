@@ -1,1 +1,9 @@
 <h2>Welcome!</h2>
+
+<p>
+  Sentar is a seating chart application for awesome teachers.
+</p>
+
+{{#unless session.isAuthenticated}}
+  {{firebase-auth}}
+{{/unless}}
