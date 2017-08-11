@@ -6,6 +6,14 @@ body {
   padding: 0;
 }
 
+a,
+a:visited,
+a:hover,
+a:active {
+  color: $blue;
+  text-decoration: none;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: 50px 1fr 50px;

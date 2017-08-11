@@ -1,7 +1,11 @@
-<h2>{{model.name}}</h2>
+<h2>
+  {{#link-to 'classrooms'}}
+    {{fa-icon 'arrow-left'}}{{model.name}}
+  {{/link-to}}
+</h2>
 {{seating-chart-list classroom=model}}
 
-<h3>Classroom Layout</h3>
+<h2>Classroom Layout</h2>
 {{#if isManagingLayout}}
   <button  {{action (toggle 'isManagingLayout' this)}}>Done</button>
   <button {{action 'createNewDesk'}}>Create Desk</button>
