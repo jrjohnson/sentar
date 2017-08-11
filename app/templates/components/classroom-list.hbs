@@ -2,14 +2,36 @@
 <ul>
   {{#each classrooms as |classroom|}}
     <li>
-      {{#link-to 'classroom' classroom}}
-        {{classroom.name}}
-      {{/link-to}}
-      <button {{action 'deleteClassroom' classroom}}>Delete</button>
+      <div class='room'>
+        {{#link-to 'classroom' classroom}}
+          {{classroom.name}}
+        {{/link-to}}
+        {{#if classroom.canDelete}}
+          <button {{action 'deleteClassroom' classroom}}>{{fa-icon 'trash'}}</button>
+        {{/if}}
+      </div>
+      <div class='stats'>
+        <strong>Seating Charts: </strong>{{classroom.seatingChartsCount}} <br />
+        <strong>People: </strong>{{await classroom.peopleCount}} <br />
+        {{classroom-layout tiny=true desks=(await classroom.positionedDesks)}}
+      </div>
+    </li>
+  {{/each}}
+  {{#if addNewClassroom}}
+    <li class='new-classroom'>
+      {{one-way-input
+        class='add-new-classroom-input'
+        value=newClassroomName
+        update=(action (mut newClassroomName))
+        onenter=(action 'createNewClassroom')
+        onescape=(perform toggleAddNewClassroom)
+      }}
+      <button class='add-button' {{action 'createNewClassroom'}}>{{fa-icon 'check'}}</button>
+      <button class='cancel-button' {{action (perform toggleAddNewClassroom)}}>{{fa-icon 'minus'}}</button>
     </li>
   {{else}}
-    <li>None</li>
-  {{/each}}
+    <li class='add-new'>
+      <button {{action (perform toggleAddNewClassroom)}}>{{fa-icon 'plus'}}</button>
+    </li>
+  {{/if}}
 </ul>
-{{one-way-input newClassroomName update=(action (mut newClassroomName))}}
-<button {{action 'createNewClassroom'}}>Add</button>

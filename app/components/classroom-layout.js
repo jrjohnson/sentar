@@ -3,12 +3,13 @@ import Ember from 'ember';
 const { Component, computed } = Ember;
 
 export default Component.extend({
-  classNames: ['classroom-layout'],
+  classNameBindings: [':classroom-layout', 'tiny'],
   init(){
     this._super(...arguments);
     this.set('desks', []);
   },
   desks: null,
+  tiny: false,
   unpositionedDesks: computed('desks.@each.positioned', function(){
     const desks = this.get('desks');
     const unpositionedDesks = desks.filter(desk => !desk.get('positioned'));

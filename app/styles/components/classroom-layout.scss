@@ -5,4 +5,13 @@
   .desk {
     @include desk($desk-size);
   }
+
+  &.tiny {
+    $desk-size: 5px;
+    @include desk-grid($desk-size);
+
+    .desk {
+      @include desk($desk-size);
+    }
+  }
 }

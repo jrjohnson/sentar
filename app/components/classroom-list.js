@@ -1,11 +1,25 @@
 import Ember from 'ember';
+import { task, timeout } from 'ember-concurrency';
 
 const { Component, inject } = Ember;
 
 export default Component.extend({
   store: inject.service(),
   authenticatedUser: inject.service(),
+  classNames: ['classroom-list'],
   newClassroomName: null,
+  addNewClassroom: false,
+
+  toggleAddNewClassroom: task(function * (){
+    const addNewClassroom = this.get('addNewClassroom');
+    if (addNewClassroom) {
+      this.set('addNewClassroom', false);
+    } else {
+      this.set('addNewClassroom', true);
+      yield timeout(100);
+      this.$('.add-new-classroom-input').focus();
+    }
+  }),
 
   actions: {
     async createNewClassroom(){
@@ -22,6 +36,7 @@ export default Component.extend({
         await newClassroom.save();
         await user.save();
         this.set('newClassroomName', null);
+        this.set('addNewClassroom', false);
       }
     },
     async deleteClassroom(classroom){
