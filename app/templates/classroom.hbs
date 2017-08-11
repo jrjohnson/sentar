@@ -1,16 +1,5 @@
 <h2>{{model.name}}</h2>
-<h3>Seating Charts</h3>
-<ul>
-  {{#each (await model.seatingCharts) as |seatingChart|}}
-    <li>
-      {{#link-to 'seatingchart' seatingChart}}{{seatingChart.name}}{{/link-to}}
-    </li>
-  {{else}}
-    <li>None</li>
-  {{/each}}
-</ul>
-{{one-way-input newSeatingChartName update=(action (mut newSeatingChartName))}}
-<button {{action 'createNewSeatingChart'}}>Add</button>
+{{seating-chart-list classroom=model}}
 
 <h3>Classroom Layout</h3>
 {{#if isManagingLayout}}

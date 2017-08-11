@@ -19,4 +19,14 @@ export default DS.Model.extend({
 
     return positionedPeople;
   }),
+  canDelete: computed('people.[]', function(){
+    const ids = this.hasMany('people').ids();
+
+    return !ids.length;
+  }),
+  peopleCount: computed('people.[]', function(){
+    const ids = this.hasMany('people').ids();
+
+    return ids.length;
+  }),
 });

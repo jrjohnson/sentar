@@ -1,0 +1,35 @@
+<h2>Seating Charts</h2>
+<ul>
+  {{#each (await classroom.seatingCharts) as |seatingChart|}}
+    <li>
+      <div class='chart'>
+        {{#link-to 'seatingchart' seatingChart}}
+          {{seatingChart.name}}
+        {{/link-to}}
+        {{#if seatingChart.canDelete}}
+          <button {{action 'deleteSeatingChart' seatingChart}}>{{fa-icon 'trash'}}</button>
+        {{/if}}
+      </div>
+      <div class='stats'>
+        <strong>People: </strong>{{await seatingChart.peopleCount}} <br />
+      </div>
+    </li>
+  {{/each}}
+  {{#if addNewSeatingChart}}
+    <li class='new-seating-chart'>
+      {{one-way-input
+        class='add-new-seating-chart-input'
+        value=newSeatingChartName
+        update=(action (mut newSeatingChartName))
+        onenter=(action 'createNewSeatingChart')
+        onescape=(perform toggleAddNewSeatingChart)
+      }}
+      <button class='add-button' {{action 'createNewSeatingChart'}}>{{fa-icon 'check'}}</button>
+      <button class='cancel-button' {{action (perform toggleAddNewSeatingChart)}}>{{fa-icon 'minus'}}</button>
+    </li>
+  {{else}}
+    <li class='add-new'>
+      <button {{action (perform toggleAddNewSeatingChart)}}>{{fa-icon 'plus'}}</button>
+    </li>
+  {{/if}}
+</ul>
