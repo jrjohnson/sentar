@@ -6,6 +6,7 @@
 
   ul {
     display: grid;
+    // sass-lint:disable no-misspelled-properties
     grid-gap: 10px;
     grid-template-columns: repeat(3, 200px);
     list-style-type: none;

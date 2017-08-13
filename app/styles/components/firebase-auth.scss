@@ -5,6 +5,7 @@
   $github-color: #999;
 
   display: grid;
+  // sass-lint:disable no-misspelled-properties
   grid-row-gap: 5px;
   list-style-type: none;
   width: 25em;

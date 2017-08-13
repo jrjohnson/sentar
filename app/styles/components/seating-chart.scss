@@ -1,6 +1,7 @@
 .seating-chart {
   $desk-size: 100px;
   display: grid;
+  // sass-lint:disable no-misspelled-properties
   grid-column-gap:  ($desk-size / 10);
   grid-template-columns: $desk-size ($desk-size * 10);
   grid-template-rows:  ($desk-size * 10);
