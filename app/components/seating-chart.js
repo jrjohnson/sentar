@@ -37,6 +37,6 @@ export default Ember.Component.extend({
       desk.get('people').removeObject(person);
       await person.save();
       await desk.save();
-    }
+    },
   }
 });

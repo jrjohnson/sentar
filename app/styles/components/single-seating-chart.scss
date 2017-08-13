@@ -1,0 +1,29 @@
+.single-seating-chart {
+  .add-new {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .add-new-people {
+    textarea {
+      height: 10em;
+      width: 90%;
+    }
+  }
+
+  .actions {
+    margin: 2em 0;
+    text-align: center;
+    width: 100%;
+
+    button {
+      background-color: $orange;
+      color: $white;
+      padding: .5em;
+
+      &:focus {
+        outline: 0;
+      }
+    }
+  }
+}

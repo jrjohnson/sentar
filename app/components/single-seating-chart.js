@@ -1,13 +1,15 @@
 import Ember from 'ember';
 
-const { Controller, inject, RSVP } = Ember;
+const { Component, inject, RSVP } = Ember;
 const { all } = RSVP;
 
-export default Controller.extend({
+export default Component.extend({
   store: inject.service(),
   newPersonName: null,
+  newPeopleList: null,
+  classNames: ['single-seating-chart'],
   async removeAllAssignments(){
-    const seatingChart = this.get('model');
+    const seatingChart = this.get('seatingChart');
     const classroom = await seatingChart.get('classroom');
     const desks = await classroom.get('desks');
     const people = await seatingChart.get('people');
@@ -20,24 +22,38 @@ export default Controller.extend({
     await all(people.invoke('save'));
     await all(desks.invoke('save'));
   },
+  async addPerson(name) {
+    const store = this.get('store');
+    const seatingChart = this.get('seatingChart');
+    const newPerson = store.createRecord('person', {
+      seatingChart,
+      name
+    });
+    seatingChart.get('people').addObject(newPerson);
+    await newPerson.save();
+    await seatingChart.save();
+  },
   actions: {
     async createNewPerson(){
-      const store = this.get('store');
       const name = this.get('newPersonName');
-      const seatingChart = this.get('model');
       if (name) {
-        const newPerson = store.createRecord('person', {
-          seatingChart,
-          name
-        });
-        seatingChart.get('people').addObject(newPerson);
-        await newPerson.save();
-        await seatingChart.save();
-        this.set('newPersonName', null);
+        await this.addPerson(name);
       }
+      this.set('newPersonName', null);
+    },
+    async createNewPeople(){
+      const text = this.get('newPeopleList');
+      const names = text.split(/\r?\n/);
+      await names.forEach(async name => {
+        const cleanName = name.trim();
+        if (cleanName.length) {
+          await this.addPerson(cleanName);
+        }
+      });
+      this.set('newPeopleList', null);
     },
     async deletePerson(person){
-      const seatingChart = this.get('model');
+      const seatingChart = this.get('seatingChart');
       seatingChart.get('people').removeObject(person);
       person.deleteRecord();
       await person.save();
@@ -48,9 +64,9 @@ export default Controller.extend({
     },
     async randomizeAssignments(){
       await this.removeAllAssignments();
-      const seatingChart = this.get('model');
+      const seatingChart = this.get('seatingChart');
       const classroom = await seatingChart.get('classroom');
-      const desks = await classroom.get('desks');
+      const desks = await classroom.get('positionedDesks');
       const deskIds = desks.mapBy('id');
       const people = await seatingChart.get('people');
       people.forEach(async person => {

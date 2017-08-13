@@ -1,0 +1,34 @@
+<h2>
+  {{#link-to 'classroom' (await seatingChart.classroom)}}
+    {{fa-icon 'arrow-left'}}{{get (await seatingChart.classroom) 'name'}}
+  {{/link-to}}
+</h2>
+<h3>{{seatingChart.name}}</h3>
+
+<div class='add-new'>
+  <div class='add-new-people'>
+    {{one-way-textarea newPeopleList
+      update=(action (mut newPeopleList))
+    }}
+    <button {{action 'createNewPeople'}}>Add New People (one per line)</button>
+  </div>
+  <div class='add-new-person'>
+    {{one-way-input newPersonName
+      onenter=(action 'createNewPerson')
+      update=(action (mut newPersonName))
+    }}
+    <button {{action 'createNewPerson'}}>Add New Person</button>
+  </div>
+</div>
+
+<div class='actions'>
+  <button {{action 'randomizeAssignments'}}>Randomize Assignments</button>
+  <button {{action 'removeAllAssignments'}}>Remove All Assignments</button>
+</div>
+
+{{seating-chart
+  deletePerson=(action 'deletePerson')
+  unpositionedPeople=(await seatingChart.unpositionedPeople)
+  positionedPeople=(await seatingChart.positionedPeople)
+  desks=(await seatingChart.classroom.positionedDesks)
+}}

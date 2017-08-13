@@ -1,7 +1,7 @@
 {{#draggable-object-target overrideClass='unpositioned-people' action="removePersonFromDesk"}}
   {{#each unpositionedPeople as |person|}}
     {{#draggable-object content=person}}
-      <div class='person'>{{person.name}}</div>
+      <div class='person'>{{person.name}} {{fa-icon 'times' class='remove' click=(action deletePerson person)}}</div>
     {{/draggable-object}}
   {{/each}}
 {{/draggable-object-target}}
@@ -13,10 +13,11 @@
       overrideClass=(concat 'desk ' desk.placeClassName)
       desk=desk
     }}
+      <div>{{desk.name}}</div>
       {{#each positionedPeople as |person|}}
         {{#if (contains person (await desk.people))}}
-          {{#draggable-object content=person}}
-            <div class='person'>{{person.name}}</div>
+          {{#draggable-object content=person overrideClass='person draggable-object'}}
+            {{person.name}}
           {{/draggable-object}}
         {{/if}}
       {{/each}}

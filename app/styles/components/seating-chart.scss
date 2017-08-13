@@ -8,8 +8,15 @@
   .unpositioned-people {
     grid-row: 1 / span 20;
 
-    .desk {
+    .person {
+      border-bottom: 1px dotted $black;
+      border-top: 1px dotted $black;
       margin-bottom: 5px;
+
+      .remove {
+        color: $red;
+        cursor: pointer;
+      }
     }
   }
 
@@ -19,14 +26,23 @@
 
   .desk {
     @include desk($desk-size);
+    align-items: stretch;
+    display: block;
+    font-size: 1.5em;
+
+    div {
+      width: 100%;
+    }
+
+    .person {
+      border-top: 1px dotted $black;
+      font-size: .5em;
+    }
   }
 
-  .person {
-    border: 1px solid $teal;
-    box-sizing: border-box;
-    height: $desk-size * .8;
-    overflow: hidden;
-    width: $desk-size * .8;
-    z-index: 20;
+  .chart-actions {
+    margin: 2em 0;
+    text-align: right;
+    width: 100%;
   }
 }

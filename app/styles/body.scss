@@ -53,3 +53,11 @@ a:active {
     grid-row: 3;
   }
 }
+
+.draggable-object {
+  cursor: grab;
+}
+
+.is-dragging-object {
+  cursor: grabbing;
+}
