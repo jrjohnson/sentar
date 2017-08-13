@@ -13,7 +13,6 @@
 </h2>
 {{#if isManagingLayout}}
   <button  {{action setIsManagingLayout false}}>Done</button>
-  <button {{action 'createNewDesk'}}>Create Desk</button>
   {{classroom-layout-manager
     positionedDesks=(await classroom.positionedDesks)
     unpositionedDesks=(await classroom.unpositionedDesks)

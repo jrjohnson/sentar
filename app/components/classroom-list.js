@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import { task, timeout } from 'ember-concurrency';
 
-const { Component, inject } = Ember;
+const { Component, inject, RSVP } = Ember;
+const { all } = RSVP;
 
 export default Component.extend({
   store: inject.service(),
@@ -21,27 +22,44 @@ export default Component.extend({
     }
   }),
 
-  actions: {
-    async createNewClassroom(){
-      const store = this.get('store');
-      const authenticatedUser = this.get('authenticatedUser');
-      const name = this.get('newClassroomName');
-      const user = await authenticatedUser.fetch();
-      if (name) {
-        const newClassroom = store.createRecord('classroom', {
-          user,
-          name
+  createNewClassroom: task(function * (){
+    const store = this.get('store');
+    const authenticatedUser = this.get('authenticatedUser');
+    const name = this.get('newClassroomName');
+    const user = yield authenticatedUser.fetch();
+    if (name) {
+      const newClassroom = store.createRecord('classroom', {
+        user,
+        name
+      });
+      const classroom = yield newClassroom.save();
+      let newDesks = [];
+      for (let i = 1; i <= 35; i++) {
+        const newDesk = store.createRecord('desk', {
+          name: i,
+          positioned: false,
+          classroom
         });
-        user.get('classrooms').addObject(newClassroom);
-        await newClassroom.save();
-        await user.save();
-        this.set('newClassroomName', null);
-        this.set('addNewClassroom', false);
+        newDesks.addObject(newDesk);
       }
-    },
+      yield all(newDesks.invoke('save'));
+      classroom.get('desks').pushObjects(newDesks);
+      yield classroom.save();
+
+      user.get('classrooms').addObject(classroom);
+      yield user.save();
+      this.set('addNewClassroom', false);
+      this.set('newClassroomName', null);
+    }
+  }),
+
+  actions: {
     async deleteClassroom(classroom){
       const authenticatedUser = this.get('authenticatedUser');
       const user = await authenticatedUser.fetch();
+      const desks = await classroom.get('desks');
+      await all(desks.invoke('deleteRecord'));
+      await all(desks.invoke('save'));
       user.get('classrooms').removeObject(classroom);
       classroom.deleteRecord();
       await classroom.save();

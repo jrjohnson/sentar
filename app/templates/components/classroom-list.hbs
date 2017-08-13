@@ -6,7 +6,7 @@
         {{#link-to 'classroom' classroom}}
           {{classroom.name}}
         {{/link-to}}
-        {{#if classroom.canDelete}}
+        {{#if (await classroom.canDelete)}}
           <button {{action 'deleteClassroom' classroom}}>{{fa-icon 'trash'}}</button>
         {{/if}}
       </div>
@@ -17,16 +17,21 @@
       </div>
     </li>
   {{/each}}
+  {{#if createNewClassroom.isRunning}}
+    <li class='create-new-classroom-is-running'>
+      {{fa-icon 'spinner' spin=true}}
+    </li>
+  {{/if}}
   {{#if addNewClassroom}}
     <li class='new-classroom'>
       {{one-way-input
         class='add-new-classroom-input'
         value=newClassroomName
         update=(action (mut newClassroomName))
-        onenter=(action 'createNewClassroom')
+        onenter=(perform createNewClassroom)
         onescape=(perform toggleAddNewClassroom)
       }}
-      <button class='add-button' {{action 'createNewClassroom'}}>{{fa-icon 'check'}}</button>
+      <button class='add-button' {{action (perform createNewClassroom)}}>{{fa-icon 'check'}}</button>
       <button class='cancel-button' {{action (perform toggleAddNewClassroom)}}>{{fa-icon 'minus'}}</button>
     </li>
   {{else}}

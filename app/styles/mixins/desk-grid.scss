@@ -35,11 +35,14 @@
 }
 
 @mixin desk ($desk-size) {
+  align-items: center;
   border: 1px solid $black;
   box-sizing: border-box;
-  font-size: .1 * $desk-size;
+  display: flex;
+  font-size: .8 * $desk-size;
   height: $desk-size;
   overflow: hidden;
+  text-align: center;
   width: $desk-size;
   z-index: 10;
 }

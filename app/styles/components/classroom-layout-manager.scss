@@ -5,6 +5,10 @@
   grid-template-columns: $desk-size ($desk-size * 10);
   grid-template-rows:  ($desk-size * 10);
 
+  .desk {
+    @include desk($desk-size);
+  }
+
   .unpositioned-desks {
     grid-row: 1 / span 20;
 
@@ -15,10 +19,6 @@
 
   .positioned-desks {
     @include desk-grid($desk-size);
-  }
-
-  .desk {
-    @include desk($desk-size);
   }
 
   .front-of-room {

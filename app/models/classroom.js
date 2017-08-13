@@ -8,11 +8,11 @@ export default DS.Model.extend({
   user: DS.belongsTo('user', { async: true, inverse: null }),
   seatingCharts: DS.hasMany('seating-chart', { async: true, inverse: null }),
   desks: DS.hasMany('desk', { async: true, inverse: null }),
-  canDelete: computed('desks.[]', 'seatingCharts.[]', function(){
+  canDelete: computed('desks.[]', 'seatingCharts.[]', async function(){
     const seatingChartIds = this.hasMany('seatingCharts').ids();
-    const deskIds = this.hasMany('desks').ids();
+    const positionedDesks = await this.get('positionedDesks');
 
-    return !seatingChartIds.length && !deskIds.length;
+    return !seatingChartIds.length && !positionedDesks.length;
   }),
   unpositionedDesks: computed('desks.@each.positioned', 'desks.[]', async function(){
     const desks = await this.get('desks');
