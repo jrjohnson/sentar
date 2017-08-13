@@ -21,14 +21,17 @@
   </div>
 </div>
 
-<div class='actions'>
-  <button {{action 'randomizeAssignments'}}>Randomize Assignments</button>
-  <button {{action 'removeAllAssignments'}}>Remove All Assignments</button>
-</div>
+{{#print-this printSelector=".seating-chart" as |doPrint|}}
+  <div class='actions'>
+    <button {{action 'randomizeAssignments'}}>Randomize Assignments</button>
+    <button {{action 'removeAllAssignments'}}>Remove All Assignments</button>
+    <button class='print' {{action doPrint}}>Print Seating Chart</button>
+  </div>
 
-{{seating-chart
-  deletePerson=(action 'deletePerson')
-  unpositionedPeople=(await seatingChart.unpositionedPeople)
-  positionedPeople=(await seatingChart.positionedPeople)
-  desks=(await seatingChart.classroom.positionedDesks)
-}}
+  {{seating-chart
+    deletePerson=(action 'deletePerson')
+    unpositionedPeople=(await seatingChart.unpositionedPeople)
+    positionedPeople=(await seatingChart.positionedPeople)
+    desks=(await seatingChart.classroom.positionedDesks)
+  }}
+{{/print-this}}

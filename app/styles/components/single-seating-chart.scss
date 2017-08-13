@@ -24,6 +24,12 @@
       &:focus {
         outline: 0;
       }
+
+      &.print {
+        background-color: $teal;
+        color: $white;
+        margin-left: 2em;
+      }
     }
   }
 }
