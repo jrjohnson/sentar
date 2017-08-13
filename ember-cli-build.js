@@ -7,7 +7,12 @@ module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     'ember-cli-babel': {
       includePolyfill: true
-    }
+    },
+    uglify: {
+      mangle: {
+        safari10: true
+      },
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated
