@@ -11,9 +11,11 @@ module.exports = function(defaults) {
     'ember-cli-babel': {
       includePolyfill: true
     },
-    uglify: {
-      mangle: {
-        safari10: true
+    'ember-cli-uglify': {
+      uglify: {
+        mangle: {
+          safari10: true
+        },
       },
     },
   });
