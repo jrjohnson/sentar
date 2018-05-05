@@ -43,7 +43,7 @@
     "ember-load-initializers": "^1.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-one-way-controls": "^2.0.1",
-    "ember-print-this": "^1.0.0-beta.2",
+    "ember-print-this": "^1.0.0-beta.8",
     "ember-promise-helpers": "^1.0.3",
     "ember-resolver": "^4.0.0",
     "ember-router-service-polyfill": "^1.0.1",
