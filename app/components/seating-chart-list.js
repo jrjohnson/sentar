@@ -1,17 +1,16 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 import { task, timeout } from 'ember-concurrency';
 
-const { Component, inject } = Ember;
-
 export default Component.extend({
-  store: inject.service(),
-  authenticatedUser: inject.service(),
+  store: service(),
+  authenticatedUser: service(),
   classNames: ['seating-chart-list'],
   newSeatingChartName: null,
   addNewSeatingChart: false,
 
   toggleAddNewSeatingChart: task(function * (){
-    const addNewSeatingChart = this.get('addNewSeatingChart');
+    const addNewSeatingChart = this.addNewSeatingChart;
     if (addNewSeatingChart) {
       this.set('addNewSeatingChart', false);
     } else {
@@ -23,9 +22,9 @@ export default Component.extend({
 
   actions: {
     async createNewSeatingChart(){
-      const store = this.get('store');
-      const name = this.get('newSeatingChartName');
-      const classroom = this.get('classroom');
+      const store = this.store;
+      const name = this.newSeatingChartName;
+      const classroom = this.classroom;
       if (name) {
         const newSeatingChart = store.createRecord('seating-chart', {
           classroom,
@@ -39,7 +38,7 @@ export default Component.extend({
       }
     },
     async deleteSeatingChart(seatingChart){
-      const classroom = this.get('classroom');
+      const classroom = this.classroom;
       classroom.get('seatingCharts').removeObject(seatingChart);
       seatingChart.deleteRecord();
       await seatingChart.save();

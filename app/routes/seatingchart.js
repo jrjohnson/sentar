@@ -1,11 +1,10 @@
-import Ember from 'ember';
-
-const { Route, inject } = Ember;
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 
 export default Route.extend({
-  store: inject.service(),
+  store: service(),
   async model({seating_chart_id:seatingChartId}){
-    const store = this.get('store');
+    const store = this.store;
     return store.find('seating-chart', seatingChartId);
   },
   serialize(seatingChart){

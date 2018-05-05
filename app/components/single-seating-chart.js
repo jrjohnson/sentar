@@ -1,15 +1,15 @@
-import Ember from 'ember';
-
-const { Component, inject, RSVP } = Ember;
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
+import RSVP from 'rsvp';
 const { all } = RSVP;
 
 export default Component.extend({
-  store: inject.service(),
+  store: service(),
   newPersonName: null,
   newPeopleList: null,
   classNames: ['single-seating-chart'],
   async removeAllAssignments(){
-    const seatingChart = this.get('seatingChart');
+    const seatingChart = this.seatingChart;
     const classroom = await seatingChart.get('classroom');
     const desks = await classroom.get('desks');
     const people = await seatingChart.get('people');
@@ -23,8 +23,8 @@ export default Component.extend({
     await all(desks.invoke('save'));
   },
   async addPerson(name) {
-    const store = this.get('store');
-    const seatingChart = this.get('seatingChart');
+    const store = this.store;
+    const seatingChart = this.seatingChart;
     const newPerson = store.createRecord('person', {
       seatingChart,
       name
@@ -35,14 +35,14 @@ export default Component.extend({
   },
   actions: {
     async createNewPerson(){
-      const name = this.get('newPersonName');
+      const name = this.newPersonName;
       if (name) {
         await this.addPerson(name);
       }
       this.set('newPersonName', null);
     },
     async createNewPeople(){
-      const text = this.get('newPeopleList');
+      const text = this.newPeopleList;
       const names = text.split(/\r?\n/);
       await names.forEach(async name => {
         const cleanName = name.trim();
@@ -53,7 +53,7 @@ export default Component.extend({
       this.set('newPeopleList', null);
     },
     async deletePerson(person){
-      const seatingChart = this.get('seatingChart');
+      const seatingChart = this.seatingChart;
       seatingChart.get('people').removeObject(person);
       person.deleteRecord();
       await person.save();
@@ -64,7 +64,7 @@ export default Component.extend({
     },
     async randomizeAssignments(){
       await this.removeAllAssignments();
-      const seatingChart = this.get('seatingChart');
+      const seatingChart = this.seatingChart;
       const classroom = await seatingChart.get('classroom');
       const desks = await classroom.get('positionedDesks');
       const deskIds = desks.mapBy('id');

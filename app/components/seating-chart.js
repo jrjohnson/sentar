@@ -1,12 +1,12 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['seating-chart'],
 
   actions: {
     async putPersonInDesk(person, { target }){
       const desk = target.desk;
-      const positionedPeople = this.get('positionedPeople');
+      const positionedPeople = this.positionedPeople;
       const originalDesk = await person.get('desk');
       const deskPeopleIds = desk.hasMany('people').ids();
       const personAlreadyInDesk = positionedPeople.find(positionedPerson => deskPeopleIds.includes(positionedPerson.get('id')));
