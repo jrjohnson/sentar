@@ -1,18 +1,19 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
+import RSVP from 'rsvp';
 import { task, timeout } from 'ember-concurrency';
 
-const { Component, inject, RSVP } = Ember;
 const { all } = RSVP;
 
 export default Component.extend({
-  store: inject.service(),
-  authenticatedUser: inject.service(),
+  store: service(),
+  authenticatedUser: service(),
   classNames: ['classroom-list'],
   newClassroomName: null,
   addNewClassroom: false,
 
   toggleAddNewClassroom: task(function * (){
-    const addNewClassroom = this.get('addNewClassroom');
+    const addNewClassroom = this.addNewClassroom;
     if (addNewClassroom) {
       this.set('addNewClassroom', false);
     } else {
@@ -23,9 +24,9 @@ export default Component.extend({
   }),
 
   createNewClassroom: task(function * (){
-    const store = this.get('store');
-    const authenticatedUser = this.get('authenticatedUser');
-    const name = this.get('newClassroomName');
+    const store = this.store;
+    const authenticatedUser = this.authenticatedUser;
+    const name = this.newClassroomName;
     const user = yield authenticatedUser.fetch();
     if (name) {
       const newClassroom = store.createRecord('classroom', {
@@ -55,7 +56,7 @@ export default Component.extend({
 
   actions: {
     async deleteClassroom(classroom){
-      const authenticatedUser = this.get('authenticatedUser');
+      const authenticatedUser = this.authenticatedUser;
       const user = await authenticatedUser.fetch();
       const desks = await classroom.get('desks');
       await all(desks.invoke('deleteRecord'));

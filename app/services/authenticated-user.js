@@ -1,12 +1,10 @@
-import Ember from 'ember';
-
-const { Service, inject } = Ember;
+import Service, { inject as service } from '@ember/service';
 
 export default Service.extend({
-  store: inject.service(),
-  session: inject.service(),
+  store: service(),
+  session: service(),
   async fetch(){
-    const session = this.get('session');
+    const session = this.session;
     const uid = session.get('currentUser.uid');
     if (!uid) {
       throw new Error("User is not currently logged in");
@@ -18,7 +16,7 @@ export default Service.extend({
     return await this.build(uid);
   },
   async _find(uid){
-    const store = this.get('store');
+    const store = this.store;
     const users = await store.query('user', {
       orderBy: 'uid',
       equalTo: uid
@@ -34,7 +32,7 @@ export default Service.extend({
     if (existingUser) {
       return existingUser;
     }
-    const store = this.get('store');
+    const store = this.store;
     const newUser = store.createRecord('user', {
       uid
     });

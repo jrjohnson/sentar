@@ -1,12 +1,11 @@
-import Ember from 'ember';
-
-const { Route, inject } = Ember;
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 
 export default Route.extend({
-  session: inject.service(),
-  store: inject.service(),
+  session: service(),
+  store: service(),
   async beforeModel() {
-    const session = this.get('session');
+    const session = this.session;
     await session.fetch().catch(function() {});
   },
   actions: {

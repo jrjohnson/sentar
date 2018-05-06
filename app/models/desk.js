@@ -1,7 +1,5 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import DS from 'ember-data';
-
-const { computed } = Ember;
 
 export default DS.Model.extend({
   name: DS.attr('string'),
@@ -11,9 +9,9 @@ export default DS.Model.extend({
   classroom: DS.belongsTo('classroom', { async: true, inverse: null }),
   people: DS.hasMany('person', { async: true, inverse: null }),
   placeClassName: computed('positioned', 'row', 'column', function(){
-    const positioned = this.get('positioned');
-    const column = this.get('column');
-    const row = this.get('row');
+    const positioned = this.positioned;
+    const column = this.column;
+    const row = this.row;
 
     if (!positioned) {
       return '';

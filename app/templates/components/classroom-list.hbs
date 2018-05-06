@@ -24,13 +24,11 @@
   {{/if}}
   {{#if addNewClassroom}}
     <li class='new-classroom'>
-      {{one-way-input
+      <input
         class='add-new-classroom-input'
-        value=newClassroomName
-        update=(action (mut newClassroomName))
-        onenter=(perform createNewClassroom)
-        onescape=(perform toggleAddNewClassroom)
-      }}
+        value={{newClassroomName}}
+        oninput={{action (mut newClassroomName) value="target.value"}}
+      >
       <button class='add-button' {{action (perform createNewClassroom)}}>{{fa-icon 'check'}}</button>
       <button class='cancel-button' {{action (perform toggleAddNewClassroom)}}>{{fa-icon 'minus'}}</button>
     </li>

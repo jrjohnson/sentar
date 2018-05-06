@@ -1,15 +1,14 @@
-import Ember from 'ember';
-
-const { Component, inject } = Ember;
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
 export default Component.extend({
-  store: inject.service(),
+  store: service(),
   classNames: ['single-classroom'],
   isManagingLayout: false,
   actions: {
     async createNewDesk(){
-      const store = this.get('store');
-      const classroom = this.get('classroom');
+      const store = this.store;
+      const classroom = this.classroom;
       const positioned = false;
       const name = '';
       const newDesk = store.createRecord('desk', {

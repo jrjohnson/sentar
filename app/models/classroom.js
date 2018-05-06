@@ -1,7 +1,5 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import DS from 'ember-data';
-
-const { computed } = Ember;
 
 export default DS.Model.extend({
   name: DS.attr(),
@@ -10,18 +8,18 @@ export default DS.Model.extend({
   desks: DS.hasMany('desk', { async: true, inverse: null }),
   canDelete: computed('desks.[]', 'seatingCharts.[]', async function(){
     const seatingChartIds = this.hasMany('seatingCharts').ids();
-    const positionedDesks = await this.get('positionedDesks');
+    const positionedDesks = await this.positionedDesks;
 
     return !seatingChartIds.length && !positionedDesks.length;
   }),
-  unpositionedDesks: computed('desks.@each.positioned', 'desks.[]', async function(){
-    const desks = await this.get('desks');
+  unpositionedDesks: computed('desks.{@each.positioned,[]}', async function(){
+    const desks = await this.desks;
     const unpositionedDesks = desks.filter(desk => !desk.get('positioned'));
 
     return unpositionedDesks;
   }),
-  positionedDesks: computed('desks.@each.positioned', 'desks.[]', async function(){
-    const desks = await this.get('desks');
+  positionedDesks: computed('desks.{@each.positioned,[]}', async function(){
+    const desks = await this.desks;
     const positionedDesks = desks.filter(desk => desk.get('positioned'));
 
     return positionedDesks;
@@ -32,7 +30,7 @@ export default DS.Model.extend({
     return ids.length;
   }),
   peopleCount: computed('seatingCharts.[]', async function(){
-    const seatingCharts = await this.get('seatingCharts');
+    const seatingCharts = await this.seatingCharts;
     const people = seatingCharts.map(seatingChart => {
       const ids = seatingChart.hasMany('people').ids();
 

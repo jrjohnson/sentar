@@ -1,10 +1,9 @@
-import Ember from 'ember';
-
-const { Route, inject } = Ember;
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 export default Route.extend({
-  authenticatedUser: inject.service(),
+  authenticatedUser: service(),
   async model(){
-    const authenticatedUser = this.get('authenticatedUser');
+    const authenticatedUser = this.authenticatedUser;
     const user = await authenticatedUser.fetch();
 
     return user.get('classrooms');
