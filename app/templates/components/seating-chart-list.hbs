@@ -17,13 +17,11 @@
   {{/each}}
   {{#if addNewSeatingChart}}
     <li class='new-seating-chart'>
-      {{one-way-input
+      <input
         class='add-new-seating-chart-input'
-        value=newSeatingChartName
-        update=(action (mut newSeatingChartName))
-        onenter=(action 'createNewSeatingChart')
-        onescape=(perform toggleAddNewSeatingChart)
-      }}
+        value={{newSeatingChartName}}
+        oninput={{action (mut newSeatingChartName) value="target.value"}}
+      >
       <button class='add-button' {{action 'createNewSeatingChart'}}>{{fa-icon 'check'}}</button>
       <button class='cancel-button' {{action (perform toggleAddNewSeatingChart)}}>{{fa-icon 'minus'}}</button>
     </li>

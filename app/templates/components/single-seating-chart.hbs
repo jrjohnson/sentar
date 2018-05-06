@@ -7,16 +7,17 @@
 
 <div class='add-new'>
   <div class='add-new-people'>
-    {{one-way-textarea newPeopleList
-      update=(action (mut newPeopleList))
-    }}
+    <textarea
+      value={{newPeopleList}}
+      oninput={{action (mut newPeopleList) value="target.value"}}>
+    </textarea>
     <button {{action 'createNewPeople'}}>Add New People (one per line)</button>
   </div>
   <div class='add-new-person'>
-    {{one-way-input newPersonName
-      onenter=(action 'createNewPerson')
-      update=(action (mut newPersonName))
-    }}
+    <input
+        value={{newPersonName}}
+        oninput={{action (mut newPersonName) value="target.value"}}
+      >
     <button {{action 'createNewPerson'}}>Add New Person</button>
   </div>
 </div>
