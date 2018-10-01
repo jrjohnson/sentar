@@ -1,6 +1,6 @@
 {{#draggable-object-target
   overrideClass="unpositioned-people"
-  action="removePersonFromDesk"
+  action=(action "removePersonFromDesk")
 }}
   {{#each unpositionedPeople as |person|}}
     {{#draggable-object content=person}}
@@ -12,7 +12,7 @@
 <div class="desks">
   {{#each desks as |desk|}}
     {{#draggable-object-target
-      action="putPersonInDesk"
+      action=(action "putPersonInDesk")
       overrideClass=(concat "desk " desk.placeClassName)
       desk=desk
     }}
