@@ -13,6 +13,6 @@ module('Integration | Component | seating chart', function(hooks) {
 
     await render(hbs`{{seating-chart}}`);
 
-    assert.dom('*').hasText('');
+    assert.dom('*').hasText('Front');
   });
 });

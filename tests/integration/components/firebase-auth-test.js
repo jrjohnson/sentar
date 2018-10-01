@@ -13,15 +13,6 @@ module('Integration | Component | firebase auth', function(hooks) {
 
     await render(hbs`{{firebase-auth}}`);
 
-    assert.dom('*').hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      {{#firebase-auth}}
-        template block text
-      {{/firebase-auth}}
-    `);
-
-    assert.dom('*').hasText('template block text');
+    assert.dom('*').hasText('Sign in with Google Sign in with Facebook Sign in with Twitter Sign in with Github Sign in Anonymously');
   });
 });

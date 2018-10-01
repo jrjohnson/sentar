@@ -13,15 +13,6 @@ module('Integration | Component | single seating chart', function(hooks) {
 
     await render(hbs`{{single-seating-chart}}`);
 
-    assert.dom('*').hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      {{#single-seating-chart}}
-        template block text
-      {{/single-seating-chart}}
-    `);
-
-    assert.dom('*').hasText('template block text');
+    assert.dom('*').hasText('Add New People (one per line) Add New Person Randomize Assignments Remove All Assignments Print Seating Chart Front');
   });
 });

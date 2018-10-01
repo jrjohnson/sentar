@@ -13,6 +13,6 @@ module('Integration | Component | sentar dashboard', function(hooks) {
 
     await render(hbs`{{sentar-dashboard}}`);
 
-    assert.dom('*').hasText('');
+    assert.dom('*').hasText('Your Classrooms');
   });
 });

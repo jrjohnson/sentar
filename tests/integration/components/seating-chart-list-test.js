@@ -13,15 +13,6 @@ module('Integration | Component | seating chart list', function(hooks) {
 
     await render(hbs`{{seating-chart-list}}`);
 
-    assert.dom('*').hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      {{#seating-chart-list}}
-        template block text
-      {{/seating-chart-list}}
-    `);
-
-    assert.dom('*').hasText('template block text');
+    assert.dom('*').hasText('Seating Charts');
   });
 });

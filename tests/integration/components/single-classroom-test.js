@@ -10,18 +10,9 @@ module('Integration | Component | single classroom', function(hooks) {
 
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.on('myAction', function(val) { ... });
+    this.set('nothing', () => { });
+    await render(hbs`{{single-classroom setIsManagingLayout=(action nothing)}}`);
 
-    await render(hbs`{{single-classroom}}`);
-
-    assert.dom('*').hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      {{#single-classroom}}
-        template block text
-      {{/single-classroom}}
-    `);
-
-    assert.dom('*').hasText('template block text');
+    assert.dom('*').hasText('Seating Charts Classroom Layout Front');
   });
 });
