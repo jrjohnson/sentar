@@ -13,6 +13,6 @@ module('Integration | Component | classroom list', function(hooks) {
 
     await render(hbs`{{classroom-list}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
   });
 });

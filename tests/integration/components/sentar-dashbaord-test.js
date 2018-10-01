@@ -13,6 +13,6 @@ module('Integration | Component | sentar dashbaord', function(hooks) {
 
     await render(hbs`{{sentar-dashbaord}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
   });
 });
