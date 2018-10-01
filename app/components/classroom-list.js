@@ -19,7 +19,7 @@ export default Component.extend({
     } else {
       this.set('addNewClassroom', true);
       yield timeout(100);
-      this.$('.add-new-classroom-input').focus();
+      this.element.querySelector('.add-new-classroom-input').focus();
     }
   }),
 

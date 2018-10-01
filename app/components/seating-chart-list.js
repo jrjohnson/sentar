@@ -16,7 +16,7 @@ export default Component.extend({
     } else {
       this.set('addNewSeatingChart', true);
       yield timeout(100);
-      this.$('.add-new-seating-chart-input').focus();
+      this.element.querySelector('.add-new-seating-chart-input').focus();
     }
   }),
 
