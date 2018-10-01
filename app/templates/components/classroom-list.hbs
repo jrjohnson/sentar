@@ -2,39 +2,39 @@
 <ul>
   {{#each classrooms as |classroom|}}
     <li>
-      <div class='room'>
-        {{#link-to 'classroom' classroom}}
+      <div class="room">
+        {{#link-to "classroom" classroom}}
           {{classroom.name}}
         {{/link-to}}
         {{#if (await classroom.canDelete)}}
-          <button {{action 'deleteClassroom' classroom}}>{{fa-icon 'trash'}}</button>
+          <button {{action "deleteClassroom" classroom}}>{{fa-icon "trash"}}</button>
         {{/if}}
       </div>
-      <div class='stats'>
-        <strong>Seating Charts: </strong>{{classroom.seatingChartsCount}} <br />
-        <strong>People: </strong>{{await classroom.peopleCount}} <br />
+      <div class="stats">
+        <strong>Seating Charts: </strong>{{classroom.seatingChartsCount}} <br>
+        <strong>People: </strong>{{await classroom.peopleCount}} <br>
         {{classroom-layout tiny=true desks=(await classroom.positionedDesks)}}
       </div>
     </li>
   {{/each}}
   {{#if createNewClassroom.isRunning}}
-    <li class='create-new-classroom-is-running'>
-      {{fa-icon 'spinner' spin=true}}
+    <li class="create-new-classroom-is-running">
+      {{fa-icon "spinner" spin=true}}
     </li>
   {{/if}}
   {{#if addNewClassroom}}
-    <li class='new-classroom'>
+    <li class="new-classroom">
       <input
-        class='add-new-classroom-input'
+        class="add-new-classroom-input"
         value={{newClassroomName}}
         oninput={{action (mut newClassroomName) value="target.value"}}
       >
-      <button class='add-button' {{action (perform createNewClassroom)}}>{{fa-icon 'check'}}</button>
-      <button class='cancel-button' {{action (perform toggleAddNewClassroom)}}>{{fa-icon 'minus'}}</button>
+      <button class="add-button" {{action (perform createNewClassroom)}}>{{fa-icon "check"}}</button>
+      <button class="cancel-button" {{action (perform toggleAddNewClassroom)}}>{{fa-icon "minus"}}</button>
     </li>
   {{else}}
-    <li class='add-new'>
-      <button {{action (perform toggleAddNewClassroom)}}>{{fa-icon 'plus'}}</button>
+    <li class="add-new">
+      <button {{action (perform toggleAddNewClassroom)}}>{{fa-icon "plus"}}</button>
     </li>
   {{/if}}
 </ul>

@@ -1,36 +1,37 @@
+{{! template-lint-disable attribute-indentation }}
 <h2>
-  {{#link-to 'classroom' (await seatingChart.classroom)}}
-    {{fa-icon 'arrow-left'}}{{get (await seatingChart.classroom) 'name'}}
+  {{#link-to "classroom" (await seatingChart.classroom)}}
+    {{fa-icon "arrow-left"}}{{get (await seatingChart.classroom) "name"}}
   {{/link-to}}
 </h2>
 <h3>{{seatingChart.name}}</h3>
 
-<div class='add-new'>
-  <div class='add-new-people'>
+<div class="add-new">
+  <div class="add-new-people">
     <textarea
       value={{newPeopleList}}
-      oninput={{action (mut newPeopleList) value="target.value"}}>
-    </textarea>
-    <button {{action 'createNewPeople'}}>Add New People (one per line)</button>
+      oninput={{action (mut newPeopleList) value="target.value"}}
+    ></textarea>
+    <button {{action "createNewPeople"}}>Add New People (one per line)</button>
   </div>
-  <div class='add-new-person'>
+  <div class="add-new-person">
     <input
-        value={{newPersonName}}
-        oninput={{action (mut newPersonName) value="target.value"}}
-      >
-    <button {{action 'createNewPerson'}}>Add New Person</button>
+      value={{newPersonName}}
+      oninput={{action (mut newPersonName) value="target.value"}}
+    >
+    <button {{action "createNewPerson"}}>Add New Person</button>
   </div>
 </div>
 
 {{#print-this printSelector=".seating-chart" as |doPrint|}}
-  <div class='actions'>
-    <button {{action 'randomizeAssignments'}}>Randomize Assignments</button>
-    <button {{action 'removeAllAssignments'}}>Remove All Assignments</button>
-    <button class='print' {{action doPrint}}>Print Seating Chart</button>
+  <div class="actions">
+    <button {{action "randomizeAssignments"}}>Randomize Assignments</button>
+    <button {{action "removeAllAssignments"}}>Remove All Assignments</button>
+    <button class="print" {{action doPrint}}>Print Seating Chart</button>
   </div>
 
   {{seating-chart
-    deletePerson=(action 'deletePerson')
+    deletePerson=(action "deletePerson")
     unpositionedPeople=(await seatingChart.unpositionedPeople)
     positionedPeople=(await seatingChart.positionedPeople)
     desks=(await seatingChart.classroom.positionedDesks)
